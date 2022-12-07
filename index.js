@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const currentBrowserSupportsPush = () => {
         if (!'PushManager' in window) { return false; }
         if (!'serviceWorker' in navigator) { return false; }
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // }).catch((err) => {
         //     pushElement.innerHTML = 'Push not granted <br>' + err;
         // });
-        pushElement.innerHTML = Notification.requestPermission();
+        pushElement.innerHTML = await Notification.requestPermission();
     } else {
         pushElement.innerHTML = 'Push is not supported';
     }
