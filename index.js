@@ -9,11 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const pushElement = document.getElementById('isPushSupported');
 
     if (currentBrowserSupportsPush()) {
-        Notification.requestPermission().then((result) => {
-            pushElement.innerHTML = 'Push allowed <br>' + result;
-        }).catch((err) => {
-            pushElement.innerHTML = 'Push not granted <br>' + err;
-        });
+        // Notification.requestPermission().then((result) => {
+        //     pushElement.innerHTML = 'Push allowed <br>' + result;
+        // }).catch((err) => {
+        //     pushElement.innerHTML = 'Push not granted <br>' + err;
+        // });
+        pushElement.innerHTML = Notification.requestPermission();
     } else {
         pushElement.innerHTML = 'Push is not supported';
     }
