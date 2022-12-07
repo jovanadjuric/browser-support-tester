@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     const pushElement = document.getElementById('isPushSupported');
+    const error = document.getElementById('error');
 
     if (currentBrowserSupportsPush()) {
         try {
-            await window.Notification.requestPermission()
-            pushElement.innerHTML = 'Push is available';
+            await Notification.requestPermission()
+            pushElement.innerHTML = Notification.permission;
         } catch (e) {
             pushElement.innerHTML = e;
+            error.innerHTML = Notification.permission;
         }
     } else {
         pushElement.innerHTML = 'Push is not supported';
