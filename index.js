@@ -1,4 +1,3 @@
-// domcontentloaded event
 document.addEventListener('DOMContentLoaded', function () {
     const currentBrowserSupportsPush = () => {
         if (!'PushManager' in window) { return false; }
@@ -10,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const pushElement = document.getElementById('isPushSupported');
 
     if (currentBrowserSupportsPush()) {
-        pushElement.innerHTML = 'Push is supported';
+        Notification.requestPermission().then((result) => {
+            pushElement.innerHTML = result;
+        });
     } else {
         pushElement.innerHTML = 'Push is not supported';
     }
