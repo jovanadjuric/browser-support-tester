@@ -1,8 +1,8 @@
 // domcontentloaded event
 document.addEventListener('DOMContentLoaded', function () {
     const currentBrowserSupportsPush = () => {
-        // if (!'PushManager' in window) { return false; }
-        // if (!'serviceWorker' in navigator) { return false; }
+        if (!'PushManager' in window) { return false; }
+        if (!'serviceWorker' in navigator) { return false; }
         if (!'Notification' in window) { return false; }
         return true;
     }
