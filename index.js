@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (currentBrowserSupportsPush()) {
         Notification.requestPermission().then((result) => {
-            pushElement.innerHTML = result;
+            pushElement.innerHTML = 'Push allowed <br>' + result;
+        }).catch((err) => {
+            pushElement.innerHTML = 'Push not granted <br>' + err;
         });
     } else {
         pushElement.innerHTML = 'Push is not supported';
