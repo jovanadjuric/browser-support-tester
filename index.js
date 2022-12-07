@@ -1,7 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function () {
-    const status = document.getElementById('status');
-    const message = document.getElementById('message');
-
+(async () => {
     const displayError = (err) => {
         message.innerHTML = `<strong>"${err}"</strong> is not defined`;
     }
@@ -23,6 +20,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         return true;
     }
 
+    const status = document.getElementById('status');
+    const message = document.getElementById('message');
+
     if (browserSupportsPush() === true) {
         try {
             await Notification.requestPermission()
@@ -34,4 +34,4 @@ document.addEventListener('DOMContentLoaded', async function () {
     } else {
         status.innerHTML = 'Push notifications are not supported by this browser.';
     }
-});
+})()
