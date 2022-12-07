@@ -1,34 +1,37 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    const currentBrowserSupportsPush = () => {
+    const status = document.getElementById('status');
+    const message = document.getElementById('message');
+
+    const displayError = (err) => {
+        message.innerHTML = `<strong>"${err}"</strong> is not defined`;
+    }
+
+    const browserSupportsPush = () => {
         if (!('PushManager' in window)) {
-            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support window.PushManager');
+            displayError('window.PushManager');
             return false;
         }
         if (!('serviceWorker' in navigator)) {
-            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support navigator.serviceWorker');
+            displayError('navigator.serviceWorker');
             return false;
         }
         if (!('Notification' in window)) {
-            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support window.Notification');
+            displayError('window.Notification');
             return false;
         }
 
-        document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does support notifications.<br> Notification in window: ' + !!('Notification' in window));
         return true;
     }
 
-    const pushElement = document.getElementById('isPushSupported');
-    const error = document.getElementById('error');
-
-    if (currentBrowserSupportsPush()) {
+    if (browserSupportsPush() === true) {
         try {
             await Notification.requestPermission()
-            pushElement.innerHTML = Notification;
-        } catch (e) {
-            pushElement.innerHTML = !!('Notification' in window);
-            error.innerHTML = e;
+            status.innerHTML = `This browser supports push notifications.`;
+            message.innerHTML = `Status: ${Notification.permission}`;
+        } catch (error) {
+            status.innerHTML = error;
         }
     } else {
-        pushElement.innerHTML = 'Push is not supported';
+        status.innerHTML = 'Push notifications are not supported by this browser.';
     }
 });
