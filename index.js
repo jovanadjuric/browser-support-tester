@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const currentBrowserSupportsPush = () => {
         if (!('PushManager' in window)) {
+            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support window.PushManager');
             return false;
         }
         if (!('serviceWorker' in navigator)) {
+            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support navigator.serviceWorker');
             return false;
         }
         if (!('Notification' in window)) {
+            document.querySelector('body').insertAdjacentHTML('afterbegin', 'This browser does NOT support window.Notification');
             return false;
         }
 
