@@ -1,4 +1,4 @@
-(async () => {
+(() => {
     const displayError = (err) => {
         message.innerHTML = `<strong>"${err}"</strong> is not defined`;
     }
@@ -25,7 +25,7 @@
 
     if (browserSupportsPush() === true) {
         try {
-            await Notification.requestPermission()
+            Notification.requestPermission()
             status.innerHTML = `This browser supports push notifications.`;
             message.innerHTML = `Status: ${Notification.permission}`;
         } catch (error) {
